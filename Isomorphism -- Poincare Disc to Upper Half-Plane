@@ -1,0 +1,39 @@
+\begin{center}
+\begin{tikzpicture}[font=\small]
+	\filldraw[fill=gray!10,draw=black,thick] (0,0) -- (1.5cm,0cm) arc (0:90:1.5cm) -- cycle;
+	\filldraw[fill=gray!20,draw=black,thick] (0,0) -- (-1.5cm,0cm) arc (180:90:1.5cm) -- cycle;
+	\filldraw[fill=gray!30,draw=black,thick] (0,0) -- (-1.5cm,0cm) arc (180:270:1.5cm) -- cycle;	
+	\filldraw[fill=gray!40,draw=black,thick] (0,0) -- (1.5cm,0cm) arc (0:-90:1.5cm) -- cycle;
+	\node[inner sep=1.5pt, circle, fill=black]  (o) at (0,0) {};
+	\draw[thick] (0,-1.5) arc (180:90:1.5cm);
+	\node[inner sep=1.5pt, circle, fill=black]  (p) at (1.5,0) {};
+	\node[inner sep=1.5pt, circle, fill=black]  (p) at (0,-1.5) {};	
+	\node[inner sep=1.5pt, circle, fill=black]  (p) at (-1.5,0) {};
+	\node[inner sep=1.5pt, circle, fill=black]  (p) at (0,1.5) {};
+	\node at (1.7,0){$1$};
+	\node at (-1.9,0){$-1$};
+	\node at (0, 1.8){$i$};
+	\node at (0,-1.8){$-i$};
+	\node at (.15,.2){$0$};
+	\node at (3,0){$\longmapsto$};
+	\filldraw[fill=gray!20,draw=gray!20,thick] (7,-1.5) -- (7,3) -- (4,3) -- (4,-1.5);
+	\filldraw[fill=gray!10,draw=gray!10,thick] (7,-1.5) -- (7,3) -- (10,3) -- (10,-1.5);
+	\filldraw[fill=gray!40,draw=black] (7,-1.5) -- (8.5cm,-1.5cm) arc (0:90:1.5cm) -- cycle;
+	\filldraw[fill=gray!30,draw=black] (7,-1.5) -- (5.5cm,-1.5cm) arc (180:90:1.5cm) -- cycle;
+	\draw[black,thick] (4,-1.5) -- (10,-1.5);
+	\draw[thick,->] (7,-1.5) -- (7,3);
+	\node[inner sep=1.5pt, circle, fill=black]  (p) at (7,-1.5) {};
+	\node[inner sep=1.5pt, circle, fill=black]  (p) at (7,0) {};
+	\node[inner sep=1.5pt, circle, fill=black]  (p) at (5.5,-1.5) {};
+	\node[inner sep=1.5pt, circle, fill=black]  (p) at (8.5,-1.5) {};
+	\draw[thick] (8.5,-1.5) arc(0:180:.75cm);
+	[font=\small]
+	\node at (4.8,-1.8){$F\f -1\g=-1$};
+	\node at (8.9,-1.8){$F\f 1\g=1$};
+	\node at (6.9,.3){$F\f 0\g= i$};
+	\node at (7,-2){$F\f -i\g= 0$};
+	\node at (7,3.2){$F\f i\g=\infty$};
+	\node at (10.3,1.5){$\HH$};
+	\node at (10.3,-1.5){$\R$};
+\end{tikzpicture}
+\end{center}
