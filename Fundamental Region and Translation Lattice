@@ -1,0 +1,29 @@
+\begin{tikzpicture}[radius=.75cm]
+	\fill [gray!20]  (0,0) -- (1,1.734) --  (3,1.734) ; 
+	\node[inner sep=1.5pt, circle, fill=black] (b) at (1,1.734){};
+	\node[inner sep=1.5pt, circle, fill=black] (a) at (2,0){};
+	\node[inner sep=1.5pt, circle, fill=black] (ab) at (3,1.734){};
+	\node at (4.5,1){Fundamental};
+	\node at (4.5,.65){region};
+	\draw[thick,->] (3.3,1) -- (1.5,1.2);
+	\draw[thick,->] (0,0) -- (b); 
+	\draw[thick,->] (0,0) -- (a); 
+		\node at (1,-.2){$a$};
+		\node at (.3,.9){$b$};
+	\node at (-4,1.76) {Translation lattice points};
+	\node at (5,1.734){};
+	\draw[thick, ->](b) -- (ab); % left quad
+	\draw[thick, ->](a) -- (ab); % left quad
+	\draw[thick] (-1,-.578) -- (4,2.312);
+	\node at (3.3,2.15){\mbox{\emph{l}}};
+	\filldraw [] (0,0) circle (2pt);
+	\filldraw [] (-1,1.734) circle (2pt);
+	\filldraw [] (0,3.464) circle (2pt);
+	\filldraw [] (-2,0) circle (2pt);	
+	\filldraw [] (-2,3.464) circle (2pt);
+	\filldraw [] (2,3.464) circle (2pt);
+	\filldraw [] (4,3.464) circle (2pt);
+	\filldraw [] (4,0) circle (2pt);
+	\draw[thick,->] (-2.2,1.6) -- (-.1,.1);
+	\draw[thick,->] (-2.7,1.9) -- (-2.05,3.3);
+\end{tikzpicture}
