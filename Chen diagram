@@ -1,0 +1,165 @@
+% Declare document class and import packages needed for the document's contents -- in this case a Chen diagram
+
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+
+% Declare and define the types of nodes which will be used multiple times in the diagram
+
+\tikzset{
+	state/.style={
+		rectangle,
+		draw=black, very thick,
+		minimum height=2em,
+		inner sep=0pt,
+		text centered,
+	},
+	terminal/.style={
+		rectangle,
+		minimum size=6mm,
+		rounded corners=3mm,
+		very thick,
+		draw=black!50,
+		top color=white,
+		bottom color=black!20,
+		font=\ttfamily,
+	},
+	nonterminal/.style={
+		rectangle,
+		minimum size=6mm,
+		very thick,
+		draw=black,
+		top color=white,
+		bottom color= white,
+		font=\itshape,
+	},
+	action/.style={
+		diamond,
+		aspect = 2,
+		minimum size=5mm,
+		very thick,
+		draw=black,
+		top color = white,
+		bottom color = white,
+		font=\ttfamily,
+	},
+	optional/.style={
+		circle,
+		minimum size=2mm,
+		very thick,
+		draw=black,
+	},
+	attrib/.style={
+		rectangle,
+		rounded corners=3mm,
+		minimum size=6mm,
+		very thick,
+		draw=black,
+	},	
+}
+
+% Within the document, define the placement of each node, and the text (if any) to go inside it.
+% In this case, a node's position is defined in relation to another node, rather than by absolute coordinates.
+
+\begin{document}
+
+\begin{center}
+\begin{tikzpicture}
+
+% Declare, name and define specific entity, attribute and action nodes
+
+	\node (rep)			        [nonterminal]		{Rep};
+	\node (r_option)			  [optional, below of = rep, yshift = -7mm] {};
+	\node (customer_rep)	  [action, below of = r_option, yshift = 9] 	{has};
+	\node (customer) 		    [nonterminal, below of = customer_rep, yshift=-10mm]	{Customer};
+	\node (customer_order)  [action, below of = customer, yshift=-10mm]	{places};
+	\node (option)			    [optional, below of = customer_order, yshift=-10mm]	{};
+	\node (order)			      [nonterminal, below of = option, yshift=13]		{Order};
+	\node (order_order_line)[action, below of = order, yshift=-10mm]	{contains};
+	\node (order_line)		  [nonterminal, below of = order_order_line, yshift=-25]	{Order Line};
+	\node (order_line_part)	[action, below of = order_line, yshift=-10mm]	{contains};
+	\node (part) 			      [nonterminal, below of = order_line_part, yshift=-10mm]	{Part};
+	\node (c_num)			      [attrib, above right of = customer, xshift=30mm] 	{\underline{Cust\_Num}};
+	\node (c_name)			    [attrib, right of = customer, xshift=30mm] 	{Cust\_Name};
+	\node (c_lim)			      [attrib, left of = customer, xshift=-30mm] 	{Credit\_Limit};
+	\node (c_rep)			      [attrib, below left of = customer, xshift=-30mm] 	{Rep\_Num (FK)};
+	\node (rep_num)		      [attrib, above right of = rep, xshift=30mm] 	{\underline{Rep\_Num}};
+	\node (rep_name)		    [attrib, right of = rep, xshift=30mm] 	{Rep\_Name};
+	\node (o_num)			      [attrib, left of = order, xshift=-30mm] 	{\underline{Order\_Num}};
+	\node (o_date)			    [attrib, below left of = order, xshift=-30mm] 	{Order\_Date};
+	\node (o_c_num)		      [attrib, right of = order, xshift=30mm] 	{Cust\_Num (FK)};
+	\node (o_l_num)		      [attrib, left of = order_line, xshift=-30mm] {\underline{Order\_Num} (FK)};
+	\node (o_l_p_num)		    [attrib, below left of = order_line, xshift=-30mm, yshift=-2mm] 	{\underline{Part\_Num} (FK)};
+	\node (qty) 			      [attrib, above right of = order_line, xshift = 30mm] {Qty};
+	\node (value)			      [attrib, right of = order_line, xshift = 30mm] {Value};
+	\node (p_num)			      [attrib, left of = part, xshift = -30mm] {\underline{Part\_Num}};
+	\node (desc)			      [attrib, above right of = part, xshift = 30mm] {Desc};
+	\node (p_o_date)		    [attrib, right of = part, xshift = 30mm] {Ord\_Date};
+	\node (price)			      [attrib, below left of = part, xshift = -30mm] {Price};
+
+% Define the lines indicating connection between nodes
+	
+	\draw[very thick] (rep) -- (rep_num);
+	\draw[very thick] (rep) -- (rep_name);
+	\draw[very thick] (rep) -- (r_option);
+	
+	\draw[very thick] (customer_rep) -- (customer);
+	
+	\draw[very thick] (customer) -- (c_num);
+	\draw[very thick] (customer) -- (c_name);
+	\draw[very thick] (customer) -- (c_lim);
+	\draw[very thick] (customer) -- (c_rep);
+	
+	\draw[very thick] (customer) -- (customer_order);
+	\draw[very thick] (customer_order) -- (option);
+		
+	\draw[very thick] (order) -- (o_date);
+	\draw[very thick] (order) -- (o_c_num);
+	\draw[very thick] (order) -- (o_num);
+	\draw[very thick] (order) -- (order_order_line);
+
+	\draw[very thick] (order_line) -- (order_order_line);
+	\draw[very thick] (order_line) -- (o_l_num);
+	\draw[very thick] (order_line) -- (o_l_p_num);
+	\draw[very thick] (order_line) -- (qty);
+	\draw[very thick, dashed] (order_line) -- (value);
+	\draw[very thick] (order_line) -- (order_line_part);
+	
+	\draw[very thick] (order_line_part) -- (part);
+		
+	\draw[very thick] (part) -- (p_num);
+	\draw[very thick] (part) -- (desc);
+	\draw[very thick] (part) -- (p_o_date);
+	\draw[very thick] (part) -- (price);
+	
+	% Declare and define nodes which have no border -- these indicate cardinality and 1:1 or 1:M relationships
+	
+	\node[below left of = rep] {(1,1)};
+	\node[below right of = rep, xshift=-5]{1};
+	
+	\node[above left of = customer]{(0,N)};
+	\node[above right of = customer]{M};
+	\node[below left of = customer]{(1,1)};
+	\node[below right of = customer]{1};
+	
+	\node[above left of = order]{(0,N)};
+	\node[below left of = order]{(1,1)};
+	\node[above right of = order]{M};
+	\node[below right of = order]{1};
+	
+	\node[below left of = order_line]{(1,N)};
+	\node[above left of = order_line, xshift=-10]{(1,N)};
+	\node[above right of = order_line]{M};
+	\node[below right of = order_line]{1};
+	
+	\node[above left of = part]{(1,1)};
+	\node[above right of = part] {1};
+	
+\end{tikzpicture}
+\end{center}
+
+\end{document}
